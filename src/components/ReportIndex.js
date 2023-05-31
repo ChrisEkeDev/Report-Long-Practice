@@ -6,9 +6,10 @@ const ReportIndex = () => {
    const reportsData = useSelector(state => (state.reports));
   const reports = []; // populate from Redux store
 
-    Object.keys(reportsData).map(key => {
+  Object.keys(reportsData).map(key => {
     reports.push(reportsData[key])
   })
+
   const resetData = (e) => {
     e.preventDefault();
   };
@@ -18,7 +19,7 @@ const ReportIndex = () => {
       <ul>
         {
           reports.map(report => (
-            <ReportIndexItem 
+            <ReportIndexItem
               report={report}
               key={report.id}
             />

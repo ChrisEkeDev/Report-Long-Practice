@@ -1,7 +1,10 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { createSingleReport } from '../store/reports';
 
 const ReportForm = ({ report, formType }) => {
+  const dispatch = useDispatch();
   const history = useHistory();
   const [understanding, setUnderstanding] = useState(report.understanding);
   const [improvement, setImprovement] = useState(report.improvement);
@@ -9,7 +12,7 @@ const ReportForm = ({ report, formType }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     report = { ...report, understanding, improvement };
-
+    dispatch(createSingleReport(report))
     history.push(`/reports/${report.id}`);
   };
 
@@ -18,7 +21,7 @@ const ReportForm = ({ report, formType }) => {
       <h2>{formType}</h2>
       <label>
         Understanding
-        <input 
+        <input
           type="text"
           value={understanding}
           onChange={e => setUnderstanding(e.target.value)}
@@ -26,7 +29,7 @@ const ReportForm = ({ report, formType }) => {
       </label>
       <label>
         Improvement
-        <textarea 
+        <textarea
           value={improvement}
           onChange={e => setImprovement(e.target.value)}
         />

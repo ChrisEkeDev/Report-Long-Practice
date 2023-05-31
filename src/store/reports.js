@@ -1,6 +1,8 @@
 import initialReports from "../data/initial-reports.json";
+
 //types
 const DELETE_REPORT = 'reports/deleteSingleReport';
+const CREATE_REPORT = 'reports/createSingleReport';
 
 //action creators
 export const deleteSingleReport = (report) => {
@@ -8,6 +10,13 @@ export const deleteSingleReport = (report) => {
         type: DELETE_REPORT,
         report
     }
+}
+
+export const createSingleReport = (report) => {
+  return {
+    type: CREATE_REPORT,
+    report
+  }
 }
 
 // reducer
@@ -22,7 +31,10 @@ const reportReducer = (state = initialState, action) => {
         const newState = {...state};
         delete newState[action.report];
         return newState;
-      }; 
+      };
+      case CREATE_REPORT: {
+        return { ...state, [action.report.id]: action.report }
+      }
       default: return state
     }
 }
