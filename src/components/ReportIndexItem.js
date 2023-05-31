@@ -1,16 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { deleteSingleReport } from '../store/reports';
 
 const ReportIndexItem = ({ report }) => {
-  const deleteReport = (e) => {
-    e.preventDefault();
+  const dispatch = useDispatch();
+
+
+  const deleteReport = (id) => {
+    // id.preventDefault();
+    dispatch(deleteSingleReport(id))
   };
 
   return (
     <li>
       <Link to={`/reports/${report.id}`}>Report #{report.id}</Link>
       <Link to={`/reports/${report.id}/edit`}>Edit</Link>
-      <button onClick={deleteReport}>Delete</button>
+      <button onClick={() => deleteReport(report.id)}>Delete</button>
     </li>
   );
 };

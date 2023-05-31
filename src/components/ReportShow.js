@@ -1,8 +1,12 @@
 import { Link, useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
 
 const ReportShow = () => {
+  const reportsData = useSelector(state => (state.reports));
+
   const { reportId } = useParams();
-  const report = {}; // populate from Redux store
+  const report = reportsData[reportId]; // populate from Redux store
 
   return (
     <section>
